@@ -19,10 +19,10 @@ int main(){
             mapa[i][j]=count;//variável para auxiliar nos valores de cada esquina, ex: mapa[0][0]=0, mapa[0][1]=1 e etc
             count++;
             //condições para somar posições para a matriz de amigos
-            if(mapa[i+1][j]!=NULL && mapa[i][j+1]!=NULL){
+            if(mapa[i+1][j]!=0 && mapa[i][j+1]!=0){
                 count2=count2+2;
             }
-            else if(mapa[i+1][j]!=NULL || mapa[i][j+1]!=NULL){
+            else if(mapa[i+1][j]!=0 || mapa[i][j+1]!=0){
                 count2++;
             }
         }
