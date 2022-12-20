@@ -4,10 +4,10 @@
 int main(){
     int linhas, colunas, count = 0, c1 = 0, c2 = 0, aux = 0, count2 = 0;
     int **mapa;
-    int **amigos;
+    int *amigos;
     scanf("%d %d", &linhas, &colunas);
+    printf("%d %d", linhas, colunas);
     mapa = (int**)malloc(sizeof(int*)*(linhas*colunas));
-    amigos = (int**)malloc(sizeof(int*)*(linhas*colunas));
     for(int i = 0; i < linhas; i++){
         for (int j = 0; j < colunas; j++){
             mapa[i] = (int*)malloc(sizeof(int)*(linhas*colunas));            
@@ -28,6 +28,7 @@ int main(){
         }
     }
     printf("%d", count2);
+    amigos = (int*)malloc(count2*sizeof(int));
     for(int k = 0; k < count2; k++){
         scanf("%d %d %d", &amigos[k], &c1, &c2);
         //scanf("%d", &c1, &c2);
@@ -47,7 +48,7 @@ int main(){
         }
     }*/
 
-    //imprimir matrizes pra testar
+    //imprimir matriz e vetor pra testar
     for(int i = 0; i < linhas; i++){
         printf("\n");
         for(int j = 0; j < colunas; j++){
@@ -57,4 +58,9 @@ int main(){
     for(int k = 0; k < count2; k++){
         printf("\n%d", amigos[k]);
     }
+    for(int i = 0;i < linhas; i++) {
+        free(mapa[i]);
+    }
+    free(mapa);
+    free(amigos);
 }
