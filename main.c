@@ -1,6 +1,34 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int somaAmgs(int *cache, int **mapa, int i, int j, int linhas, int colunas){
+    if ((i < 0) || (i == linhas) || (j == colunas)) { 
+        return 0;
+    }
+    if(cache[x][y] != -1){
+        return cache[x][y] ;
+    }
+    // Baixo
+    int baixo = somaAmgs(cache, mapa, i + 1, j, linhas, colunas);
+     // Esquerda
+    int esquerda = somaAmgs(cache, mapa, i, j + 1, linhas, colunas);
+ 
+    // Return the maximum and store the value
+    return cache[x][y] = mapa[x][y] + max(baixo, esquerda); 
+}
+int amigosMax(int **mapa, int linhas, int colunas){
+    int *cache = (int *) malloc(sizeof(int) * ((linhas*colunas) + 1));
+    int max_amg = 0;
+    for(int i = 0; i <= linhas; i++){
+        for(int j = 0; i <= colunas; j++){
+            cache[i]=-1;
+        }   
+    }
+    max_amg = somaAmgs(cache, mapa, linhas, colunas);
+    free(cache);
+
+    return max_amg;  
+}
 int main(){
     int linhas, colunas, count = 0, c1 = 0, c2 = 0, aux = 0, count2 = 0;
     int **mapa;
@@ -14,6 +42,13 @@ int main(){
         }
     }
     for(int i = 0; i < linhas; i++){//lendo esquinas
+        for(int j = 0; j < colunas; j++){
+            //scanf("%d", &caminho[i][j]);
+            mapa[i][j]=count;//variável para auxiliar nos valores de cada esquina, ex: mapa[0][0]=0, mapa[0][1]=1 e etc
+            count++;
+        }
+    }
+    /*for(int i = 0; i < linhas; i++){//lendo esquinas
         for(int j = 0; j < colunas; j++){
             //scanf("%d", &caminho[i][j]);
             mapa[i][j]=count;//variável para auxiliar nos valores de cada esquina, ex: mapa[0][0]=0, mapa[0][1]=1 e etc
@@ -55,12 +90,12 @@ int main(){
             printf("%d ", mapa[i][j]);
         }
     }
-    for(int k = 0; k < count2; k++){
+    /*for(int k = 0; k < count2; k++){
         printf("\n%d", amigos[k]);
-    }
+    }*/
     for(int i = 0;i < linhas; i++) {
         free(mapa[i]);
     }
     free(mapa);
-    free(amigos);
+    //free(amigos);
 }
